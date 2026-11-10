@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SlowDrive Rig Layout Designer</title>
+<style>
+:root{color-scheme:dark;--ink:#eee4d5;--muted:#b49e83;--gold:#d6a66d;--panel:#211b17;--edge:#68513b}*{box-sizing:border-box}body{margin:0;background:#171310;color:var(--ink);font:14px/1.4 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select{font:inherit;color:inherit}button{background:#34291f;border:1px solid #775d40;border-radius:7px;padding:8px 11px;cursor:pointer}button:hover{background:#493725;border-color:var(--gold)}.app{max-width:1500px;margin:auto;padding:18px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}.brand h1{font-size:23px;margin:0;color:#f2d8b5;letter-spacing:.04em}.brand p{margin:3px 0 0;color:var(--muted)}.actions{display:flex;gap:8px;flex-wrap:wrap}.primary{background:#775032;border-color:#bd8b55}.layout{display:grid;grid-template-columns:220px minmax(500px,1fr) 255px;gap:14px;align-items:start}.panel{background:#211b17;border:1px solid #443528;border-radius:11px;padding:13px;box-shadow:0 10px 25px #0005}.panel h2{font-size:13px;text-transform:uppercase;letter-spacing:.12em;color:#d7b48a;margin:2px 0 12px}.addlist{display:grid;gap:7px}.addlist button{text-align:left}.hint{font-size:12px;color:#a8947e;margin-top:12px}.boardwrap{overflow:auto;border-radius:12px;box-shadow:0 14px 34px #0008}.board{position:relative;min-width:640px;width:100%;height:min(70vh,720px);min-height:510px;overflow:hidden;border:8px solid #30251d;border-radius:14px;background:linear-gradient(180deg,#38241b,#69432b 58%,#4a2f20);box-shadow:inset 0 0 0 2px #886446,inset 0 0 55px #130b08}.board:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(2deg,transparent 0 35px,#150d0945 36px,#d29b6220 38px,transparent 40px),repeating-linear-gradient(91deg,transparent 0 190px,#170e0c28 191px,#d9a67817 194px,transparent 197px);pointer-events:none}.board.studio{background:radial-gradient(ellipse at 50% 22%,#d4a87538,transparent 35%),linear-gradient(180deg,#231b1a 0 57%,#49372d 58%,#624632 100%);box-shadow:inset 0 0 80px #090706,inset 0 0 0 2px #806345}.board.studio:before{background:repeating-linear-gradient(90deg,transparent 0 42px,#d09a6421 43px,#100b0d88 46px,transparent 51px),linear-gradient(180deg,#130f15aa 0 56%,transparent 72%)}.board:after{content:"SLOWDRIVE  /  RIG LAYOUT";position:absolute;right:16px;bottom:9px;color:#f4dec033;font-size:10px;letter-spacing:.2em;pointer-events:none}.workspace{min-width:0}.tabs{display:flex;gap:7px;margin:0 0 9px}.tabs button.active{background:#825832;border-color:#d2a46e;color:#fff0db}.item{position:absolute;left:var(--x);top:var(--y);width:var(--w);height:var(--h);touch-action:none;user-select:none;cursor:grab;z-index:1}.item.selected{z-index:5}.item.selected .shell{outline:2px solid #f1c17e;outline-offset:3px}.item:active{cursor:grabbing}.shell{height:100%;position:relative;border:1px solid #b28d62;border-radius:8px;box-shadow:0 12px 16px #090604b5,inset 0 1px 2px #fff4;overflow:hidden}.amp .shell{background:linear-gradient(#282522 0 21%,#4d4741 22% 66%,#282522 67%);border:2px solid #9c8b78}.amp .shell:before{content:"";position:absolute;top:8%;left:4%;right:4%;height:16%;border-radius:3px;background:linear-gradient(#e5dbca,#9a8d7a);box-shadow:0 0 0 2px #171512}.amp .speaker{position:absolute;left:8%;right:8%;bottom:8%;height:48%;border-radius:4px;border:1px solid #b9a48b;background:repeating-linear-gradient(90deg,#695b4a 0 2px,#a28e73 3px 4px),repeating-linear-gradient(0deg,#493c31 0 2px,#a28e73 3px 4px);opacity:.8}.cab .shell{background:linear-gradient(#25211d,#443930);border:2px solid #96836d}.cab .speaker{position:absolute;inset:8%;border:1px solid #c0ac8e;border-radius:5px;background:repeating-linear-gradient(90deg,#776852 0 2px,#aa9676 3px 4px),repeating-linear-gradient(0deg,#625542 0 2px,#aa9676 3px 4px)}.cab .badge{position:absolute;bottom:10px;left:25%;right:25%;text-align:center;background:#171512;color:#e8d4b7;font-size:10px;padding:2px}.pedal .shell{background:linear-gradient(130deg,var(--finish2),var(--finish));border:2px solid #181717;border-radius:10px}.pedal .face{position:absolute;inset:5px;border:1px solid #ffffff2b;border-radius:7px;background:repeating-linear-gradient(0deg,#ffffff0b 0 1px,transparent 2px 5px)}.pedal .label{position:absolute;top:10px;left:7px;right:7px;text-align:center;color:#fff7e8;font-weight:800;font-size:clamp(10px,1.1vw,14px);text-shadow:0 2px 3px #000}.pedal .knobs{position:absolute;top:32%;left:8%;right:8%;display:flex;justify-content:space-evenly;gap:3px}.knob{width:clamp(17px,2.4vw,31px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 28%,#e9dfce,#817b70 45%,#262321 75%);border:2px solid #2c2927;box-shadow:0 3px 4px #0009;position:relative}.knob:after{content:"";position:absolute;height:34%;width:2px;background:#282624;left:calc(50% - 1px);top:3px}.foot{position:absolute;bottom:8%;left:50%;transform:translateX(-50%);width:clamp(23px,3vw,38px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff,#b1ada4 30%,#54524e 55%,#191817 72%);border:2px solid #211e1c;box-shadow:0 3px 4px #0009}.led{position:absolute;bottom:19%;left:20%;width:9px;height:9px;background:#ef554a;border-radius:50%;box-shadow:0 0 10px currentColor}.pedal.on .led{background:#ffca70;box-shadow:0 0 11px #ffca70}.delete{position:absolute;right:-9px;top:-9px;width:24px;height:24px;padding:0;border-radius:50%;background:#992f28;border-color:#edb1a0;display:none}.selected .delete{display:block}.resizer{position:absolute;right:-5px;bottom:-5px;width:14px;height:14px;background:#f0c27b;border:2px solid #271b13;border-radius:3px;cursor:nwse-resize;display:none}.selected .resizer{display:block}.field{display:grid;gap:5px;margin-bottom:12px}.field label{font-size:12px;color:#bca78e}.field input,.field select{width:100%;background:#171411;border:1px solid #594631;border-radius:6px;padding:8px}.field input[type=color]{height:38px;padding:3px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.empty{color:#a8957d;font-size:12px}.status{font-size:12px;color:#ceb28c;min-height:18px;margin-top:9px}@media(max-width:1000px){.layout{grid-template-columns:190px 1fr}.right{grid-column:1/-1}.right .grid2{max-width:500px}}@media(max-width:700px){.app{padding:10px}.top{align-items:flex-start;flex-direction:column}.layout{grid-template-columns:1fr}.left,.right{grid-column:auto}.boardwrap{grid-row:1}.board{height:560px}.addlist{grid-template-columns:1fr 1fr}}
+</style></head>
+<body><main class="app"><header class="top"><div class="brand"><h1>SlowDrive Rig Designer</h1><p>Arrange your virtual rig. Select an item to edit it. Drag to move, corner to resize.</p></div><div class="actions"><button id="undo">Undo</button><button id="reset">Reset layout</button><button id="import">Import layout</button><button class="primary" id="export">Export layout JSON</button><input id="file" type="file" accept="application/json" hidden></div></header>
+<div class="layout"><aside class="panel left"><h2>Add to board</h2><div class="addlist"><button data-kind="amp">＋ Twin style amp</button><button data-kind="cab">＋ 2×12 cabinet</button><button data-kind="gate">＋ Noise gate</button><button data-kind="boost">＋ Clean boost</button><button data-kind="drive">＋ Overdrive</button><button data-kind="delay">＋ Delay</button><button data-kind="pedal">＋ Custom pedal</button></div><p class="hint">Move pieces anywhere on the board. Use Delete or Backspace to remove a selected piece. Undo reverses the last change.</p><div class="status" id="status"></div></aside>
+<section class="workspace"><nav class="tabs"><button class="active" data-view="amp">Amp / Cabinet</button><button data-view="pedals">Pedalboard</button></nav><div class="boardwrap"><div class="board studio" id="board" aria-label="Rig layout board"></div></div></section>
+<aside class="panel right"><h2>Selected item</h2><div id="empty" class="empty">Select an amp, cabinet, or pedal on the board to edit its label, size, or color.</div><div id="editor" hidden><div class="field"><label for="name">Label</label><input id="name" maxlength="28"></div><div class="field"><label for="type">Item type</label><select id="type"><option value="amp">Amp</option><option value="cab">Cabinet</option><option value="pedal">Pedal</option></select></div><div class="field"><label for="finish">Finish color</label><input id="finish" type="color"></div><div class="grid2"><div class="field"><label for="width">Width</label><input id="width" type="number" min="70" max="480"></div><div class="field"><label for="height">Height</label><input id="height" type="number" min="65" max="420"></div></div><p class="hint">Layout export includes each item’s kind, label, color, size, and position. Send that JSON back when you want me to apply your design.</p></div></aside></div></main>
+<script>
+const board = document.querySelector('#board');
+const status = document.querySelector('#status');
+const colors = { amp:'#4a4540', cab:'#76634d', gate:'#68717c', boost:'#809266', drive:'#268775', delay:'#33819c', pedal:'#9b6249' };
+let activeView = 'amp';
+let layouts = { amp: defaultAmp(), pedals: defaultPedals() };
+let items = layouts[activeView];
+let selected = null;
+let history = [];
+
+function uid() { return 'item-' + Math.random().toString(36).slice(2,10); }
+function defaultAmp() { return [
+  {id:uid(),kind:'amp',name:'Twin Reverb style',color:colors.amp,x:37,y:12,w:270,h:155},
+  {id:uid(),kind:'cab',name:'2×12 Cabinet',color:colors.cab,x:33,y:49,w:330,h:205}
+]; }
+function defaultPedals() { return [
+  {id:uid(),kind:'gate',name:'Noise Gate',color:colors.gate,x:3,y:22,w:118,h:250},
+  {id:uid(),kind:'boost',name:'Clean Boost',color:colors.boost,x:19,y:22,w:120,h:250},
+  {id:uid(),kind:'drive',name:'Overdrive',color:colors.drive,x:48,y:22,w:145,h:250},
+  {id:uid(),kind:'delay',name:'Delay',color:colors.delay,x:75,y:22,w:132,h:250}
+]; }
+function esc(value) { return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function shade(hex) { const n=parseInt(hex.slice(1),16);return '#'+[16,8,0].map(k=>Math.max(0,((n>>k)&255)-38).toString(16).padStart(2,'0')).join(''); }
+function snapshot() { history.push(JSON.stringify(layouts));if(history.length>60)history.shift(); }
+function render() {
+  layouts[activeView]=items;
+  board.classList.toggle('studio',activeView==='amp');
+  board.innerHTML='';
+  for (const item of items) {
+    const el=document.createElement('div');
+    const isPedal=['pedal','gate','boost','drive','delay'].includes(item.kind);
+    el.className=`item ${item.kind}${isPedal && item.kind!=='pedal'?' pedal':''}${item.on?' on':''}${item.id===selected?' selected':''}`;
+    el.dataset.id=item.id;
+    Object.assign(el.style,{'--x':item.x+'%','--y':item.y+'%','--w':item.w+'px','--h':item.h+'px','--finish':item.color,'--finish2':shade(item.color)});
+    const visual=isPedal?`<div class="shell"><div class="face"></div><div class="label">${esc(item.name)}</div><div class="knobs"><i class="knob"></i><i class="knob"></i>${item.w>125?'<i class="knob"></i>':''}</div><span class="led"></span><span class="foot"></span></div>`:item.kind==='amp'?`<div class="shell"><div class="speaker"></div><div class="label">${esc(item.name)}</div></div>`:`<div class="shell"><div class="speaker"></div><div class="badge">${esc(item.name)}</div></div>`;
+    el.innerHTML=visual+`<button class="delete" title="Remove">×</button><span class="resizer" title="Resize"></span>`;
+    board.append(el);
+    el.addEventListener('pointerdown',event=>startDrag(event,item,el));
+    el.addEventListener('click',event=>{if(!event.target.closest('.delete,.resizer'))select(item.id)});
+    el.querySelector('.delete').onclick=event=>{event.stopPropagation();snapshot();items=items.filter(x=>x.id!==item.id);selected=null;render()};
+  }
+  updateEditor();
+}
+function select(id) { selected=id;board.querySelectorAll('.item').forEach(el=>el.classList.toggle('selected',el.dataset.id===id));updateEditor(); }
+function startDrag(event,item,el) {
+  if(event.target.closest('.delete'))return;
+  select(item.id);
+  const resize=event.target.closest('.resizer'),rect=board.getBoundingClientRect();
+  const startX=event.clientX,startY=event.clientY,x=item.x,y=item.y,w=item.w,h=item.h;
+  try{el.setPointerCapture(event.pointerId)}catch{}
+  snapshot();
+  function move(e) {
+    if(resize){item.w=Math.max(70,Math.min(480,w+e.clientX-startX));item.h=Math.max(65,Math.min(420,h+e.clientY-startY));}
+    else{item.x=Math.max(0,Math.min(100-item.w/rect.width*100,x+(e.clientX-startX)/rect.width*100));item.y=Math.max(0,Math.min(100-item.h/rect.height*100,y+(e.clientY-startY)/rect.height*100));}
+    el.style.setProperty('--x',item.x+'%');el.style.setProperty('--y',item.y+'%');el.style.setProperty('--w',item.w+'px');el.style.setProperty('--h',item.h+'px');
+  }
+  function stop(){el.removeEventListener('pointermove',move);el.removeEventListener('pointerup',stop);el.removeEventListener('pointercancel',stop);layouts[activeView]=items;updateEditor();}
+  el.addEventListener('pointermove',move);el.addEventListener('pointerup',stop);el.addEventListener('pointercancel',stop);
+}
+function updateEditor(){const item=items.find(i=>i.id===selected),editor=document.querySelector('#editor');document.querySelector('#empty').hidden=!!item;editor.hidden=!item;if(!item)return;document.querySelector('#name').value=item.name;document.querySelector('#type').value=['amp','cab'].includes(item.kind)?item.kind:'pedal';document.querySelector('#finish').value=item.color;document.querySelector('#width').value=Math.round(item.w);document.querySelector('#height').value=Math.round(item.h);}
+function edit(key,value){const item=items.find(i=>i.id===selected);if(!item)return;snapshot();item[key]=value;layouts[activeView]=items;render();}
+document.querySelectorAll('[data-view]').forEach(button=>button.onclick=()=>{layouts[activeView]=items;activeView=button.dataset.view;items=layouts[activeView];selected=null;document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b===button));document.querySelector('.left h2').textContent=activeView==='amp'?'Add to amp / cabinet':'Add to pedalboard';document.querySelectorAll('[data-kind]').forEach(b=>b.hidden=activeView==='amp'?!['amp','cab'].includes(b.dataset.kind):['amp','cab'].includes(b.dataset.kind));document.querySelector('#empty').textContent=activeView==='amp'?'Select an amp or cabinet to edit its label, size, or color.':'Select a pedal to edit its label, size, or color.';render();});
+document.querySelectorAll('[data-kind]').forEach(button=>button.onclick=()=>{snapshot();const kind=button.dataset.kind,names={amp:'Twin Reverb style',cab:'2×12 Cabinet',gate:'Noise Gate',boost:'Clean Boost',drive:'Overdrive',delay:'Delay',pedal:'New Pedal'};const item={id:uid(),kind:kind==='pedal'?'pedal':kind,name:names[kind],color:colors[kind]||colors.pedal,x:10+Math.random()*35,y:18+Math.random()*20,w:kind==='amp'?250:kind==='cab'?280:125,h:kind==='amp'?150:kind==='cab'?180:245};items.push(item);selected=item.id;layouts[activeView]=items;render();});
+document.querySelector('#name').oninput=e=>{const i=items.find(i=>i.id===selected);if(i){i.name=e.target.value;const label=board.querySelector(`[data-id="${i.id}"] .label,.item[data-id="${i.id}"] .badge`);if(label)label.textContent=i.name;}};
+document.querySelector('#name').onchange=e=>{const i=items.find(i=>i.id===selected);if(i){snapshot();i.name=e.target.value;layouts[activeView]=items;}};
+document.querySelector('#type').onchange=e=>edit('kind',e.target.value);
+document.querySelector('#finish').oninput=e=>{const i=items.find(i=>i.id===selected);if(i){i.color=e.target.value;render();}};
+document.querySelector('#finish').onchange=()=>snapshot();
+for(const key of ['width','height'])document.querySelector('#'+key).onchange=e=>edit(key==='width'?'w':'h',Math.max(65,Number(e.target.value)||100));
+document.querySelector('#undo').onclick=()=>{if(history.length){layouts=JSON.parse(history.pop());items=layouts[activeView];render();status.textContent='Last change undone.';}};
+document.querySelector('#reset').onclick=()=>{snapshot();layouts[activeView]=activeView==='amp'?defaultAmp():defaultPedals();items=layouts[activeView];selected=null;render();status.textContent='This view was reset.';};
+document.querySelector('#export').onclick=()=>{layouts[activeView]=items;const data={version:2,views:layouts};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='slowdrive-rig-layout.json';a.click();URL.revokeObjectURL(a.href);status.textContent='Both views exported as JSON.';};
+document.querySelector('#import').onclick=()=>document.querySelector('#file').click();
+document.querySelector('#file').onchange=async e=>{try{const data=JSON.parse(await e.target.files[0].text());if(data.views?.amp&&data.views?.pedals)layouts=data.views;else if(Array.isArray(data.items))layouts[activeView]=data.items;else throw Error();items=layouts[activeView];selected=null;render();status.textContent='Layout imported.';}catch{status.textContent='Could not read that layout JSON.';}};
+window.onkeydown=e=>{if((e.key==='Delete'||e.key==='Backspace')&&!['INPUT','SELECT'].includes(document.activeElement.tagName)&&selected){snapshot();items=items.filter(i=>i.id!==selected);layouts[activeView]=items;selected=null;render();}};
+document.querySelector('[data-view="amp"]').click();
+</script></body></html>

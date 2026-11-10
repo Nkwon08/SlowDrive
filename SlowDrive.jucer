@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="E1KXmo" name="SlowDrive" projectType="audioplug" useAppConfig="0"
+<JUCERPROJECT id="E1KXmo" name="KwonTone" pluginName="KwonTone" pluginDesc="KwonTone" projectType="audioplug" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1">
   <MAINGROUP id="uW6iSs" name="SlowDrive">
     <GROUP id="{0F0C1AAE-C160-7857-1470-7C609FDE30A5}" name="Source">

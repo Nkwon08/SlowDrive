@@ -63,6 +63,69 @@ private:
 
     juce::SmoothedValue<float> level, drive, tone;
     std::array<float, 2> inputLowpass {}, outputLowpass {};
+    struct RigStage
+    {
+        RigStage (juce::AudioProcessorValueTreeState&, const char* enabledId, const char* amountId);
+        void prepare (double sampleRate);
+        void updateTargets();
+
+        std::atomic<float>* const enabledParameter;
+        std::atomic<float>* const amountParameter;
+        juce::SmoothedValue<float> mix, amount;
+    };
+
+    RigStage boost { parameters, "boostOn", "boostAmount" };
+    RigStage amp { parameters, "ampOn", "ampLevel" };
+    RigStage cabinet { parameters, "cabOn", "cabTone" };
+    std::atomic<float>* const driveEnabled = parameters.getRawParameterValue ("driveOn");
+    juce::SmoothedValue<float> driveMix;
+
+    struct SmoothedControl
+    {
+        SmoothedControl (juce::AudioProcessorValueTreeState& state, const char* id)
+            : parameter (state.getRawParameterValue (id)) {}
+        std::atomic<float>* const parameter;
+        juce::SmoothedValue<float> value;
+    };
+
+    SmoothedControl ampPower { parameters, "ampPower" };
+    SmoothedControl ampStandby { parameters, "ampStandby" };
+    SmoothedControl normalTreble { parameters, "normalTreble" };
+    SmoothedControl normalMiddle { parameters, "normalMiddle" };
+    SmoothedControl normalBass { parameters, "normalBass" };
+    SmoothedControl vibratoVolume { parameters, "vibratoVolume" };
+    SmoothedControl vibratoTreble { parameters, "vibratoTreble" };
+    SmoothedControl vibratoMiddle { parameters, "vibratoMiddle" };
+    SmoothedControl vibratoBass { parameters, "vibratoBass" };
+    SmoothedControl reverb { parameters, "reverb" };
+    SmoothedControl speed { parameters, "speed" };
+    SmoothedControl intensity { parameters, "intensity" };
+    SmoothedControl normalBright { parameters, "normalBright" };
+    SmoothedControl vibratoBright { parameters, "vibratoBright" };
+    SmoothedControl vibratoChannel { parameters, "vibratoChannel" };
+    SmoothedControl inputTwo { parameters, "inputTwo" };
+    SmoothedControl reverbOn { parameters, "reverbOn" };
+    SmoothedControl tremoloOn { parameters, "tremoloOn" };
+
+    RigStage gate { parameters, "gateOn", "gateThreshold" };
+    RigStage delay { parameters, "delayOn", "delayTime" };
+    SmoothedControl delayFeedback { parameters, "delayFeedback" };
+    SmoothedControl delayBlend { parameters, "delayMix" };
+    juce::AudioBuffer<float> delayBuffer;
+    int delayWritePosition = 0;
+    float gateEnvelope = 0.0f, gateGain = 1.0f;
+    float gateDetectorRelease = 0.0f, gateAttack = 0.0f, gateRelease = 0.0f;
+
+    std::array<float, 2> ampBassFilter {}, ampTrebleFilter {}, springInputFilter {};
+    juce::Reverb spring;
+    float ampBassStep = 0.0f, ampTrebleStep = 0.0f, springInputStep = 0.0f;
+    float tremoloPhase = 0.0f, inverseSampleRate = 0.0f;
+    void updateExtraControls (double sampleRate = 0.0);
+
+    std::array<float, 2> cabBass {}, cabLowpass1 {}, cabLowpass2 {};
+    float cabBassStep = 0.0f;
+    float cabDarkStep = 0.0f;
+    float cabBrightStep = 0.0f;
     float inputFilterStep = 0.0f;
     float outputFilterStep = 0.0f;
 
